@@ -1,0 +1,11 @@
+.NavBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(to right, #018f8f, #51f7f7);
+  padding: 1rem;
+}
+
+.LogoMarca {
+  height: 8vmin;
+}

@@ -1,0 +1,10 @@
+.titulo {
+  font-size: 3rem;
+  padding: 1.5rem;
+  background-color: black;
+  color: white;
+}
+
+.subtitulo {
+  font-size: 2rem;
+}
