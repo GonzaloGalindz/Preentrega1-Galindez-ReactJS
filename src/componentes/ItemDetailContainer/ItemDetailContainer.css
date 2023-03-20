@@ -1,0 +1,10 @@
+.tituloIDC {
+  font-size: 3rem;
+  padding-top: 1.5rem;
+  padding-bottom: 4rem;
+  color: black;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  text-decoration: underline;
+}

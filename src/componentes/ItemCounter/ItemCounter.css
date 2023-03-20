@@ -1,0 +1,19 @@
+.counter {
+  display: flex;
+  justify-content: center;
+}
+
+.div-counter {
+  margin-bottom: 2rem;
+}
+
+button {
+  color: white;
+  background-color: black;
+  padding: 1rem;
+}
+
+button:hover {
+  color: black;
+  background-color: white;
+}

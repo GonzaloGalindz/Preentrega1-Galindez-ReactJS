@@ -1,0 +1,17 @@
+.titulo {
+  font-size: 3rem;
+  padding: 1.5rem;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.sub-titulo {
+  font-size: 2.5rem;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  text-decoration: underline;
+}
