@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import { getIndumentaryById } from "../../AsyncMock";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
 import "./ItemDetailContainer.css";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../../services/firebase/firebaseConfig";
 
 const ItemDetailContainer = () => {
   const [indumentary, setIndumentary] = useState();
-  const [loading, setLoading] = useState(true);
-
+  const [loading, setLoading] = useState(false);
   const { itemId } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-    getIndumentaryById(itemId)
-      .then((indumentary) => {
-        setIndumentary(indumentary);
+    const ProductRef = doc(db, "Products", itemId);
+
+    getDoc(ProductRef)
+      .then((snapshot) => {
+        const data = snapshot.data();
+        const productAdapted = { id: snapshot.id, ...data };
+        setIndumentary(productAdapted);
       })
       .catch((error) => {
         console.log(error);
@@ -23,10 +26,6 @@ const ItemDetailContainer = () => {
         setLoading(false);
       });
   }, [itemId]);
-
-  if (loading) {
-    return <h1>Cargando...</h1>;
-  }
 
   return (
     <div>

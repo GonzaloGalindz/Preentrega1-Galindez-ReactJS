@@ -1,24 +1,34 @@
 import "./ItemListContainer.css";
-import { useEffect, useState } from "react";
-import { getIndumentary, getIndumentaryByCategory } from "../../AsyncMock";
 import ItemList from "../ItemList/ItemList";
+import { useEffect, useState, memo } from "react";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { db } from "../../services/firebase/firebaseConfig";
 import { useParams } from "react-router-dom";
 
+const ItemListMemo = memo(ItemList);
+
 const ItemListContainer = ({ greeting }) => {
-  const [indumentaryState, setIndumentaryState] = useState([]);
+  const [indumentary, setIndumentary] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  const [title, setTitle] = useState("un titulo");
 
   const { categoryId } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-    const asyncFunction = categoryId
-      ? getIndumentaryByCategory
-      : getIndumentary;
+    const ProductsRef = categoryId
+      ? query(collection(db, "Products"), where("category", "==", categoryId))
+      : collection(db, "Products");
 
-    asyncFunction(categoryId)
-      .then((clothing) => {
-        setIndumentaryState(clothing);
+    getDocs(ProductsRef)
+      .then((snapshot) => {
+        const productsAdapted = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          return { id: doc.id, ...data };
+        });
+
+        setIndumentary(productsAdapted);
       })
       .catch((error) => {
         console.log(error);
@@ -28,19 +38,25 @@ const ItemListContainer = ({ greeting }) => {
       });
   }, [categoryId]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setTitle("otro titulo");
+    }, 1500);
+  }, []);
+
   if (loading) {
     return <h1>Cargando...</h1>;
   }
 
-  if (indumentaryState && indumentaryState.length === 0) {
-    return <h1>No hay productos</h1>;
+  if (error) {
+    return <h1>Vuelva a cargar la pagina</h1>;
   }
 
   return (
     <div>
       <h1 className="titulo">⭐Stars Indumentaria⭐</h1>
       <h1 className="sub-titulo">{greeting}</h1>
-      <ItemList clothing={indumentaryState} />
+      <ItemListMemo indumentary={indumentary} />
     </div>
   );
 };

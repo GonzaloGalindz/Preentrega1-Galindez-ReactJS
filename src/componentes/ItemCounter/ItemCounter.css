@@ -7,13 +7,18 @@
   margin-bottom: 2rem;
 }
 
-button {
+.button {
   color: white;
   background-color: black;
   padding: 1rem;
 }
 
-button:hover {
+.button:hover {
   color: black;
   background-color: white;
+}
+
+.div-count {
+  display: flex;
+  justify-content: center;
 }
