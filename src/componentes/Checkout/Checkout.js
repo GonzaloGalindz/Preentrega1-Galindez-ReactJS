@@ -26,25 +26,21 @@ const Checkout = () => {
     try {
       setLoading(true);
       const objOrder = {
-        buyer: {
-          name: "Sebastian Zuviria",
-          phone: "123456789",
-          address: "mi direaccion 123",
-        },
+        buyer: {},
         items: cart,
         total: total,
       };
 
-      const ids = cart.map((prod) => prod.id);
+      const ids = cart.map((ind) => ind.id);
 
-      const productRef = query(
-        collection(db, "products"),
+      const indumentaryRef = query(
+        collection(db, "Products"),
         where(documentId(), "in", ids)
       );
 
-      const productsAddedFromFirestore = await getDocs(productRef);
+      const indumentariesAddedFromFirestore = await getDocs(indumentaryRef);
 
-      const { docs } = productsAddedFromFirestore;
+      const { docs } = indumentariesAddedFromFirestore;
 
       const batch = writeBatch(db);
       const outOfStock = [];
@@ -53,11 +49,11 @@ const Checkout = () => {
         const dataDoc = doc.data();
         const stockDb = dataDoc.stock;
 
-        const productAddedToCart = cart.find((prod) => prod.id === doc.id);
-        const prodQuantity = productAddedToCart?.quantity;
+        const indumentaryAddedToCart = cart.find((prod) => prod.id === doc.id);
+        const indQuantity = indumentaryAddedToCart?.quantity;
 
-        if (stockDb >= prodQuantity) {
-          batch.update(doc.ref, { stock: stockDb - prodQuantity });
+        if (stockDb >= indQuantity) {
+          batch.update(doc.ref, { stock: stockDb - indQuantity });
         } else {
           outOfStock.push({ id: doc, ...dataDoc });
         }
@@ -66,7 +62,7 @@ const Checkout = () => {
       if (outOfStock.length === 0) {
         batch.commit();
 
-        const orderRef = collection(db, "orders");
+        const orderRef = collection(db, "Orders");
 
         const orderAdded = await addDoc(orderRef, objOrder);
         clearCart();
