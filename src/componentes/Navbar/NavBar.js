@@ -7,10 +7,10 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../services/firebase/firebaseConfig";
 
 const NavBar = () => {
-  const [categories, setCategories] = useState([]);
+  const [Categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const CategoriesRef = query(collection(db, "Categories"), orderBy("order"));
+    const CategoriesRef = query(collection(db, "Categories"));
 
     getDocs(CategoriesRef)
       .then((snapshot) => {
@@ -30,31 +30,20 @@ const NavBar = () => {
   return (
     <nav className="NavBar">
       <img src={LogoNavBar} alt="Logo de la marca" className="LogoMarca" />
-      {/* <Link to="/">Ecommerce</Link> */}
       <div className="Categories">
-        {categories.map((cat) => {
+        {Categories.map((Cat) => {
           return (
             <NavLink
-              key={cat.id}
-              to={`/category/${cat.slug}`}
+              key={Cat.id}
+              to={`/category/${Cat.slug}`}
               className={({ isActive }) => (isActive ? "ActiveLink" : "Link")}
             >
-              {cat.label}
+              {Cat.label}
             </NavLink>
           );
         })}
       </div>
       <CartWidget />
-      {/* {user ? (
-        <CartWidget />
-      ) : (
-        <NavLink
-          to="/login"
-          className={({ isActive }) => (isActive ? "ActiveLink" : "Link")}
-        >
-          Login
-        </NavLink>
-      )} */}
     </nav>
   );
 };

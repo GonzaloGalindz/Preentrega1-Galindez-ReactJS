@@ -3,8 +3,8 @@ import { useState, useContext, createContext } from "react";
 export const Notification = ({ type, text }) => {
   const notificationStyle = {
     position: "absolute",
-    bottom: 100,
-    right: 50,
+    top: 100,
+    right: 20,
     backgroundColor: type === "success" ? "green" : "red",
     color: "white",
     padding: "10px 20px 10px 20px",

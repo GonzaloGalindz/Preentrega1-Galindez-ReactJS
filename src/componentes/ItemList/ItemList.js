@@ -1,10 +1,10 @@
 import Item from "../Item/Item";
 import "./ItemList.css";
 
-const ItemList = ({ clothing }) => {
+const ItemList = ({ indumentary }) => {
   return (
     <div>
-      {clothing.map((indumentary) => {
+      {indumentary.map((indumentary) => {
         return <Item key={indumentary.id} {...indumentary} />;
       })}
     </div>

@@ -1,0 +1,20 @@
+.formulario {
+  font-size: 1rem;
+  padding-left: 1rem;
+}
+
+.datos {
+  font-size: 1.1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.form {
+  display: grid;
+  justify-items: center;
+  gap: 1em;
+}
+
+.button-form {
+  padding: 1rem 5rem 1rem 5rem;
+}

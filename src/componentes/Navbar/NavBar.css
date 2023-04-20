@@ -11,20 +11,25 @@
 }
 
 .ActiveLink {
-  color: white;
+  color: rgb(207, 198, 30);
   padding: 1.2rem;
   background-color: black;
   font-size: 1.5rem;
+  border-radius: 10%;
+  opacity: 1;
 }
 
 .Link {
   color: black;
   padding: 1rem;
-  background-color: white;
+  background-color: rgb(207, 198, 30);
   font-size: 1.3rem;
+  border-radius: 10%;
+  opacity: 0.8;
 }
 
 .Link:hover {
-  color: white;
+  color: rgb(207, 198, 30);
   background-color: black;
+  opacity: 1;
 }

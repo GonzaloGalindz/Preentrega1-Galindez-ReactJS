@@ -1,8 +1,3 @@
-.counter {
-  display: flex;
-  justify-content: center;
-}
-
 .div-counter {
   margin-bottom: 2rem;
 }
@@ -19,6 +14,8 @@
 }
 
 .div-count {
-  display: flex;
-  justify-content: center;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 }

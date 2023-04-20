@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./ItemCounter.css";
 
-const ItemCounter = ({ stock = 0, initial = 1, onAdd }) => {
+const ItemCounter = ({ Stock = 0, initial = 1, onAdd }) => {
   const [quantity, setQuantity] = useState(initial);
 
   const increment = () => {
-    if (quantity < stock) {
+    if (quantity < Stock) {
       setQuantity(quantity + 1);
     }
   };
@@ -19,11 +19,10 @@ const ItemCounter = ({ stock = 0, initial = 1, onAdd }) => {
   return (
     <div className="div-counter">
       <div className="div-count">
-        <h2 className="counter">{quantity}</h2>
         <button className="button" onClick={decrement}>
           -
         </button>
-        <h4 className="Number">{quantity}</h4>
+        <h2>{quantity}</h2>
         <button className="button" onClick={increment}>
           +
         </button>

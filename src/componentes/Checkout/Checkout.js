@@ -12,6 +12,8 @@ import {
 } from "firebase/firestore";
 import { useNotification } from "../../Notification/NotificationService";
 import { useNavigate } from "react-router-dom";
+import "./Checkout.css";
+import Form from "../Form/Form";
 
 const Checkout = () => {
   const [orderId, setOrderId] = useState("");
@@ -47,13 +49,13 @@ const Checkout = () => {
 
       docs.forEach((doc) => {
         const dataDoc = doc.data();
-        const stockDb = dataDoc.stock;
+        const StockDb = dataDoc.Stock;
 
         const indumentaryAddedToCart = cart.find((prod) => prod.id === doc.id);
         const indQuantity = indumentaryAddedToCart?.quantity;
 
-        if (stockDb >= indQuantity) {
-          batch.update(doc.ref, { stock: stockDb - indQuantity });
+        if (StockDb >= indQuantity) {
+          batch.update(doc.ref, { Stock: StockDb - indQuantity });
         } else {
           outOfStock.push({ id: doc, ...dataDoc });
         }
@@ -85,18 +87,34 @@ const Checkout = () => {
   };
 
   if (loading) {
-    return <h1>SE esta generando su orden...</h1>;
+    return (
+      <h1 className="h2-check">
+        Por favor sea paciente, estamos generando su orden
+      </h1>
+    );
   }
 
   return (
     <div>
-      <h1>Checkout</h1>
+      <h1 className="h1-check">Checkout</h1>
 
-      {/* <Form onConfirm={handleConfirm}/> */}
+      <Form onConfirm={handleConfirm} />
       {orderId ? (
-        <h2>El id de su orden es: {orderId}</h2>
+        <div>
+          <h2 className="h2-checkout">El id de su orden es: {orderId}</h2>
+          <h4 className="h4-checkout">
+            Gracias por elegir ⭐Stars Indumentaria⭐
+          </h4>
+        </div>
       ) : (
-        <button onClick={handleConfirm}>Generar orden</button>
+        <div>
+          <h2 className="h2-checkout">
+            Para generar su orden, presione el boton a continuación:
+          </h2>
+          <button className="button-checkout" onClick={handleConfirm}>
+            Generar orden
+          </button>
+        </div>
       )}
     </div>
   );

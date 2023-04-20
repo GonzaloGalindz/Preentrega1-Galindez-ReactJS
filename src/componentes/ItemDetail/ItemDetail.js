@@ -4,17 +4,17 @@ import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 
-const ItemDetail = ({ id, name, price, category, img, stock, description }) => {
+const ItemDetail = ({ id, Name, Price, Category, Img, Stock, Description }) => {
   const [quantity, setQuantity] = useState(0);
   const { addItem } = useContext(CartContext);
 
   const handleOnAdd = (quantity) => {
     const productToAdd = {
       id,
-      name,
-      price,
+      Name,
+      Price,
       quantity,
-      stock,
+      Stock,
     };
     setQuantity(quantity);
     addItem(productToAdd);
@@ -22,18 +22,17 @@ const ItemDetail = ({ id, name, price, category, img, stock, description }) => {
 
   return (
     <div className="item-detail">
-      <h2 className="nombre">{name}</h2>
-      <img src={img} alt={name} className="imagen" />
-      <h3>Stock: {stock}</h3>
-      <h3>Precio: ${price}</h3>
-      <p className="descripcion">Descripción: {description}</p>
+      <h2 className="nombre">{Name}</h2>
+      <img src={Img} alt={Name} className="imagen" />
+      <h3>Precio: ${Price}</h3>
+      <p className="descripcion">Descripción: {Description}</p>
       <div className="ItemDetail-div">
         {/* {
                     quantity > 0 ? (
                         <Link to='/cart'>Terminar compra</Link>
                     ) : ( */}
-        {stock > 0 ? (
-          <ItemCounter onAdd={handleOnAdd} stock={stock} />
+        {Stock > 0 ? (
+          <ItemCounter onAdd={handleOnAdd} Stock={Stock} />
         ) : (
           <div>No hay stock disponible</div>
         )}

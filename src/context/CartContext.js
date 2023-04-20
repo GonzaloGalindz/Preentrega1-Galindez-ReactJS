@@ -15,17 +15,17 @@ export const CartProvider = ({ children }) => {
       const updatedCart = cart.map((ind) => {
         if (ind.id === indumentaryToAdd.id) {
           let newQuantity = ind.quantity + indumentaryToAdd.quantity;
-          if (newQuantity > ind.stock) {
-            newQuantity = ind.stock;
+          if (newQuantity > ind.Stock) {
+            newQuantity = ind.Stock;
             setNotification(
               "success",
-              `El stock disponible es de ${ind.stock}`,
+              `El stock disponible es de ${ind.Stock}`,
               1
             );
           } else {
             setNotification(
               "success",
-              `Se agrego correctamente ${indumentaryToAdd.quantity} ${indumentaryToAdd.name}`,
+              `Se agrego correctamente ${indumentaryToAdd.quantity} ${indumentaryToAdd.Name}`,
               1
             );
           }
@@ -62,7 +62,7 @@ export const CartProvider = ({ children }) => {
   const getTotal = () => {
     let total = 0;
     cart.forEach((ind) => {
-      total += ind.quantity * ind.price;
+      total += ind.quantity * ind.Price;
     });
     return total;
   };

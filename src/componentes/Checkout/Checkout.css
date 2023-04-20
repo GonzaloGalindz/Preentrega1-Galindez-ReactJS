@@ -1,0 +1,28 @@
+.h1-check {
+  margin: 2rem;
+  font-weight: bold;
+}
+
+.h2-checkout {
+  margin-bottom: 2rem;
+  text-decoration: underline;
+}
+
+.h2-check {
+  margin-top: 2rem;
+}
+
+.h4-checkout {
+  background-color: black;
+  color: aliceblue;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.button-checkout {
+  padding: 1rem;
+  font-size: medium;
+  font-weight: bold;
+  background-color: aliceblue;
+  color: black;
+}
