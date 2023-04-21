@@ -28,7 +28,7 @@ const Checkout = () => {
     try {
       setLoading(true);
       const objOrder = {
-        buyer: {},
+        buyer: userData,
         items: cart,
         total: total,
       };
@@ -98,7 +98,6 @@ const Checkout = () => {
     <div>
       <h1 className="h1-check">Checkout</h1>
 
-      <Form onConfirm={handleConfirm} />
       {orderId ? (
         <div>
           <h2 className="h2-checkout">El id de su orden es: {orderId}</h2>
@@ -109,11 +108,10 @@ const Checkout = () => {
       ) : (
         <div>
           <h2 className="h2-checkout">
-            Para generar su orden, presione el boton a continuación:
+            Para generar su orden, complete el siguiente formulario:
           </h2>
-          <button className="button-checkout" onClick={handleConfirm}>
-            Generar orden
-          </button>
+          <Form onConfirm={handleConfirm} />
+          <button className="button-checkout">Generar orden</button>
         </div>
       )}
     </div>

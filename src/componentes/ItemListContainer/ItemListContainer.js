@@ -1,55 +1,29 @@
 import "./ItemListContainer.css";
 import ItemList from "../ItemList/ItemList";
-import { useEffect, useState, memo } from "react";
-import { getDocs, collection, query, where } from "firebase/firestore";
-import { db } from "../../services/firebase/firebaseConfig";
+import { memo } from "react";
 import { useParams } from "react-router-dom";
+import { getProducts } from "../../services/firebase/firestore/products";
+import { useAsync } from "../../hooks/useAsync";
 
 const ItemListMemo = memo(ItemList);
 
 const ItemListContainer = ({ greeting }) => {
-  const [indumentary, setIndumentary] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  const [title, setTitle] = useState("un titulo");
-
   const { categoryId } = useParams();
 
-  useEffect(() => {
-    const ProductsRef = categoryId
-      ? query(collection(db, "Products"), where("Category", "==", categoryId))
-      : collection(db, "Products");
+  const getProductsWithCategory = () => getProducts(categoryId);
 
-    getDocs(ProductsRef)
-      .then((snapshot) => {
-        const productsAdapted = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return { id: doc.id, ...data };
-        });
-
-        setIndumentary(productsAdapted);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [categoryId]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setTitle("otro titulo");
-    }, 1500);
-  }, []);
+  const {
+    data: indumentary,
+    error,
+    loading,
+  } = useAsync(getProductsWithCategory, [categoryId]);
 
   if (loading) {
-    return <h1>Cargando...</h1>;
+    return <h1 className="loading">Cargando...</h1>;
   }
 
   if (error) {
-    return <h1>Vuelva a cargar la pagina</h1>;
+    return <h1 className="loading">Vuelva a cargar la pagina</h1>;
   }
 
   return (

@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
 import "./ItemDetailContainer.css";
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "../../services/firebase/firebaseConfig";
+import { getProductsById } from "../../services/firebase/firestore/products";
+import { useAsync } from "../../hooks/useAsync";
 
 const ItemDetailContainer = () => {
-  const [indumentary, setIndumentary] = useState();
-  const [loading, setLoading] = useState(false);
   const { itemId } = useParams();
 
-  useEffect(() => {
-    const ProductRef = doc(db, "Products", itemId);
+  const getProductsWithCategory = () => getProductsById(itemId);
 
-    getDoc(ProductRef)
-      .then((snapshot) => {
-        const data = snapshot.data();
-        const productAdapted = { id: snapshot.id, ...data };
-        setIndumentary(productAdapted);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [itemId]);
+  const {
+    data: indumentary,
+    error,
+    loading,
+  } = useAsync(getProductsWithCategory, [itemId]);
+
+  if (loading) {
+    return <h1 className="loading">Cargando...</h1>;
+  }
+
+  if (error) {
+    return <h1 className="loading">Vuelva a cargar la pagina</h1>;
+  }
 
   return (
     <div>

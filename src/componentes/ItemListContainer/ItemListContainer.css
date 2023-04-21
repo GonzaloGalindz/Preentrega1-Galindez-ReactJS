@@ -15,3 +15,8 @@
   font-weight: bold;
   text-decoration: underline;
 }
+
+.loading {
+  padding: 16rem;
+  font-weight: bold;
+}

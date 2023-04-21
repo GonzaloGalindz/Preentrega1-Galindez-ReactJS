@@ -1,9 +1,10 @@
 import LogoNavBar from "./assets/LogoNavBar.svg";
 import "./NavBar.css";
 import CartWidget from "../CartWidget/CartWidget";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+// import { getCategories } from "../../services/firebase/firestore/categories";
+import { getDocs, query, collection } from "firebase/firestore";
 import { db } from "../../services/firebase/firebaseConfig";
 
 const NavBar = () => {
@@ -26,10 +27,19 @@ const NavBar = () => {
         console.log(error);
       });
   }, []);
+  // getCategories()
+  //   .then((Categories) => {
+  //     setCategories(Categories);
+  //   })
+  //   .catch((error) => {
+  //     return error;
+  //   });
 
   return (
     <nav className="NavBar">
-      <img src={LogoNavBar} alt="Logo de la marca" className="LogoMarca" />
+      <a href="/">
+        <img src={LogoNavBar} alt="Logo de la marca" className="LogoMarca" />
+      </a>
       <div className="Categories">
         {Categories.map((Cat) => {
           return (

@@ -1,76 +1,62 @@
 import { useState } from "react";
 import "./Form.css";
 
-const Form = () => {
-  const { values, setValues } = useState({
-    Name: "",
-    LastName: "",
-    Email: "",
-    Phone: "",
-    Address: "",
-  });
+const Form = ({ onConfirm }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+  const userData = {
+    name,
+    email,
+    phone,
+    address,
   };
-
-  const handleForm = (event) => {
-    event.preventDefault();
-    alert(values);
-  };
+  onConfirm(userData);
 
   return (
     <div className="formulario">
-      <form action="" onSubmit={handleForm} className="form">
+      <form action="" className="form">
         <h3>Solicitud de datos</h3>
         <input
           className="datos btn btn-outline-dark"
           type="text"
-          name="Name"
-          value={values.Name}
+          name="name"
           placeholder="Ingrese su nombre"
-          onChange={handleInputChange}
-        ></input>
-        <input
-          className="datos btn btn-outline-dark"
-          type="text"
-          name="LastName"
-          value={values.LastName}
-          placeholder="Ingrese su apellido"
-          onChange={handleInputChange}
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         ></input>
         <input
           className="datos btn btn-outline-dark"
           type="email"
-          name="Email"
-          value={values.Email}
+          name="email"
           placeholder="Ingrese su email"
           autoComplete="off"
-          onChange={handleInputChange}
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         ></input>
         <input
           className="datos btn btn-outline-dark"
-          type="text"
-          name="Phone"
-          value={values.Phone}
+          type="number"
+          name="phone"
           placeholder="Ingrese su numero de teléfono"
-          onChange={handleInputChange}
+          required
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         ></input>
         <input
           className="datos btn btn-outline-dark"
           type="text"
-          name="Address"
-          value={values.Address}
+          name="address"
           placeholder="Ingrese su dirección"
-          onChange={handleInputChange}
+          required
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
         ></input>
-        <button className="button-form" type="submit">
-          Enviar
-        </button>
+        {/* <button className="button-form">Finalizar Compra</button> */}
       </form>
     </div>
   );
