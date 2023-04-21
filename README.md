@@ -4,6 +4,42 @@ Soy Gonzalo Galindez y presento mi proyecto final del curso de REACT en CODERHOU
 
 En proyectos de desarrollo web y javascript vengo trajando con eCommerce de indumentarias, asi que decidi seguir en este curso creando un proyecto con la misma tematica pero con diferentes funcionalidades.
 
+## Tecnologias utilizadas
+
+- HTML
+- CSS
+- Javascript
+- ReactJS
+
+## Instalación git clone
+
+Para acceder al proyecto con git clone, debes ejecutar en la consola:
+
+```sh
+git clone "https://github.com/GonzaloGalindz/ProyectoFinal-Galindez-React.git"
+npm install
+npm start
+```
+
+## Librerias
+
+- React-router-dom
+- React-bootstrap
+- React-Firebase
+
+## Firebase/ Firestore
+
+- Collection: Products. Cada product tiene los siguientes campos:
+
+| Campo       | Type   |
+| ----------- | ------ |
+| Name        | String |
+| Category    | String |
+| Img         | String |
+| Description | String |
+| Price       | Number |
+| Stock       | Number |
+
 # Pasos para crear y usar un proyecto con REACT
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
