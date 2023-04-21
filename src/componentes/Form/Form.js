@@ -7,17 +7,16 @@ const Form = ({ onConfirm }) => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  const userData = {
-    name,
-    email,
-    phone,
-    address,
+  const userData = { name, email, phone, address };
+
+  const sendData = (e) => {
+    e.preventDefault();
+    onConfirm(userData);
   };
-  onConfirm(userData);
 
   return (
     <div className="formulario">
-      <form action="" className="form">
+      <form action="" className="form" onSubmit={sendData}>
         <h3>Solicitud de datos</h3>
         <input
           className="datos btn btn-outline-dark"
@@ -56,7 +55,9 @@ const Form = ({ onConfirm }) => {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         ></input>
-        {/* <button className="button-form">Finalizar Compra</button> */}
+        <button className="button-checkout" type="submit">
+          Generar orden
+        </button>
       </form>
     </div>
   );

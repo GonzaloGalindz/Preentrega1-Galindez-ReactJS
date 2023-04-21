@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Proyecto Final - REACT - STARS INDUMENTARIA
+
+Soy Gonzalo Galindez y presento mi proyecto final del curso de REACT en CODERHOUSE, lo realice con el fin de implementar los conocimientos aprendidos durante el periodo de tiempo que duro el mismo.
+
+En proyectos de desarrollo web y javascript vengo trajando con eCommerce de indumentarias, asi que decidi seguir en este curso creando un proyecto con la misma tematica pero con diferentes funcionalidades.
+
+# Pasos para crear y usar un proyecto con REACT
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

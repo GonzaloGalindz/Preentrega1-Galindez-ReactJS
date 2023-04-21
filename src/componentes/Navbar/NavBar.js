@@ -3,7 +3,7 @@ import "./NavBar.css";
 import CartWidget from "../CartWidget/CartWidget";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import { getCategories } from "../../services/firebase/firestore/categories";
+import { getCategories } from "../../services/firebase/firestore/categories";
 import { getDocs, query, collection } from "firebase/firestore";
 import { db } from "../../services/firebase/firebaseConfig";
 
@@ -11,29 +11,23 @@ const NavBar = () => {
   const [Categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const CategoriesRef = query(collection(db, "Categories"));
+    // const CategoriesRef = query(collection(db, "Categories"));
 
-    getDocs(CategoriesRef)
-      .then((snapshot) => {
-        const categoriesAdapted = snapshot.docs.map((doc) => {
-          const data = doc.data();
+    // getDocs(CategoriesRef)
+    //   .then((snapshot) => {
+    //     const categoriesAdapted = snapshot.docs.map((doc) => {
+    //       const data = doc.data();
 
-          return { id: doc.id, ...data };
-        });
+    //       return { id: doc.id, ...data };
+    //     });
 
-        setCategories(categoriesAdapted);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //     setCategories(categoriesAdapted);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    getCategories().then((res) => setCategories(res));
   }, []);
-  // getCategories()
-  //   .then((Categories) => {
-  //     setCategories(Categories);
-  //   })
-  //   .catch((error) => {
-  //     return error;
-  //   });
 
   return (
     <nav className="NavBar">
